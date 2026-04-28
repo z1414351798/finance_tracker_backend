@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.z.finance.tracker.mapper.TransactionMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO transactions(text, amount, category_id, date, user_id, type, note)
+        VALUES(#{text}, #{amount}, #{categoryId}, #{date}, #{userId}, #{type}, #{note})
+    </insert>
+
+    <select id="findAllFiltered" resultType="com.z.finance.tracker.entity.Transaction">
+        SELECT t.*, c.name as categoryName
+        FROM transactions t
+        LEFT JOIN categories c ON t.category_id = c.id
+        WHERE t.user_id = #{userId}
+
+        <if test="text != null and text != ''">
+            AND t.text LIKE CONCAT('%', #{text}, '%')
+        </if>
+
+        <if test="categoryId != null">
+            AND t.category_id = #{categoryId}
+        </if>
+
+        <if test="type != null">
+            AND t.type = #{type}
+        </if>
+
+        <if test="minAmount != null">
+            AND ABS(t.amount) &gt;= #{minAmount}
+        </if>
+        <if test="maxAmount != null">
+            AND ABS(t.amount) &lt;= #{maxAmount}
+        </if>
+
+        <if test="startDate != null and startDate != ''">
+            AND t.date &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and endDate != ''">
+            AND t.date &lt;= #{endDate}
+        </if>
+        <if test="note != null and note != ''">
+            AND t.note LIKE CONCAT('%', #{note}, '%')
+        </if>
+
+        ORDER BY t.date DESC, t.id DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countFiltered" resultType="long">
+        SELECT COUNT(*)
+        FROM transactions t
+        WHERE user_id = #{userId}
+        <if test="text != null and text != ''">
+            AND t.text LIKE CONCAT('%', #{text}, '%')
+        </if>
+
+        <if test="categoryId != null">
+            AND t.category_id = #{categoryId}
+        </if>
+
+        <if test="type != null">
+            AND t.type = #{type}
+        </if>
+
+        <if test="minAmount != null">
+            AND ABS(t.amount) &gt;= #{minAmount}
+        </if>
+        <if test="maxAmount != null">
+            AND ABS(t.amount) &lt;= #{maxAmount}
+        </if>
+
+        <if test="startDate != null and startDate != ''">
+            AND t.date &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and endDate != ''">
+            AND t.date &lt;= #{endDate}
+        </if>
+        <if test="note != null and note != ''">
+            AND t.note LIKE CONCAT('%', #{note}, '%')
+        </if>
+    </select>
+
+    <select id="getIncomeVsExpense" resultType="map">
+        SELECT
+        SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) as totalIncome,
+        SUM(CASE WHEN type = 'EXPENSE' THEN ABS(amount) ELSE 0 END) as totalExpense
+        FROM transactions
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="getCategorySummary" resultType="map">
+        SELECT c.name as name, SUM(ABS(t.amount)) as value
+        FROM transactions t
+        INNER JOIN categories c ON t.category_id = c.id
+        WHERE t.user_id = #{userId} AND t.type = #{type}
+        GROUP BY c.name
+    </select>
+
+    <select id="getTimeSeriesData" resultType="map">
+        SELECT
+        <choose>
+            <when test="range == 'DAY'">DATE_FORMAT(date, '%Y-%m-%d')</when>
+            <when test="range == 'MONTH'">DATE_FORMAT(date, '%Y-%m')</when>
+            <when test="range == 'YEAR'">DATE_FORMAT(date, '%Y')</when>
+            <otherwise>DATE_FORMAT(date, '%Y-%m-%d')</otherwise>
+        </choose> as timeLabel,
+        SUM(ABS(amount)) as total
+        FROM transactions
+        WHERE user_id = #{userId} AND type = #{type}
+        GROUP BY timeLabel
+        ORDER BY timeLabel ASC
+    </select>
+
+    <update id="update">
+        UPDATE transactions
+        SET text = #{text},
+        amount = #{amount},
+        category_id = #{categoryId},
+        date = #{date},
+        note = #{note}
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+
+    <select id="getDailyTrends" resultType="com.z.finance.tracker.dto.DailyTrendDTO">
+        SELECT
+        DATE(t.date) as date,
+        SUM(CASE WHEN t.type = 'INCOME' THEN t.amount ELSE 0 END) as income,
+        SUM(CASE WHEN t.type = 'EXPENSE' THEN t.amount ELSE 0 END) as expense
+        FROM transactions t
+        WHERE t.user_id = #{userId}
+        AND t.date >= DATE_SUB(CURDATE(), INTERVAL #{days} DAY)
+        GROUP BY DATE(t.date)
+        ORDER BY date ASC
+    </select>
+
+    <!-- Monthly net balance for dashboard -->
+    <select id="getMonthlyBalance" resultType="map">
+        SELECT
+        SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) as income,
+        SUM(CASE WHEN type = 'EXPENSE' THEN ABS(amount) ELSE 0 END) as expense,
+        SUM(CASE WHEN type = 'INCOME' THEN amount ELSE ABS(amount) * -1 END) as net
+        FROM transactions
+        WHERE user_id = #{userId}
+        AND DATE_FORMAT(date, '%Y-%m') = #{month}
+    </select>
+
+    <!-- All-time total balance -->
+    <select id="getTotalBalance" resultType="double">
+        SELECT COALESCE(
+        SUM(CASE WHEN type = 'INCOME' THEN amount ELSE ABS(amount) * -1 END), 0
+        )
+        FROM transactions
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- Last N months income vs expense broken down per month -->
+    <select id="getMonthlyBreakdown" resultType="map">
+        SELECT
+        DATE_FORMAT(date, '%Y-%m') as month,
+        SUM(CASE WHEN type = 'INCOME'  THEN amount ELSE 0 END) as income,
+        SUM(CASE WHEN type = 'EXPENSE' THEN amount ELSE 0 END) as expense,
+        COUNT(*) as transactionCount
+        FROM transactions
+        WHERE user_id = #{userId}
+        AND date >= DATE_SUB(CURDATE(), INTERVAL #{months} MONTH)
+        GROUP BY DATE_FORMAT(date, '%Y-%m')
+        ORDER BY month DESC
+    </select>
+
+    <!-- Biggest individual expense transactions -->
+    <select id="getBiggestTransactions" resultType="map">
+        SELECT
+        t.text,
+        t.amount,
+        t.date,
+        c.name as categoryName
+        FROM transactions t
+        LEFT JOIN categories c ON t.category_id = c.id
+        WHERE t.user_id = #{userId}
+        AND t.type = 'EXPENSE'
+        AND t.date >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+        ORDER BY t.amount DESC
+        LIMIT #{limit}
+    </select>
+
+</mapper>

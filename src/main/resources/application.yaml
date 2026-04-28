@@ -1,0 +1,34 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/financeTracker?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: z7763882336
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  hikari:
+    maximum-pool-size: 20
+    minimum-idle: 5
+    idle-timeout: 600000
+    connection-timeout: 30000
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.z.finance.tracker.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+jwt:
+  secret: "your-super-long-secure-secret-key-that-is-at-least-32-characters"
+  expiration: 86400000 # 24 hours in ms
+
+app:
+  upload-dir: ./uploads
+
+ollama:
+  base-url: http://localhost:11434
+  model: llama3

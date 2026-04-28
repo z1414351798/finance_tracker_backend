@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.z.finance.tracker.mapper.CategoryMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO categories (name, type, user_id)
+        VALUES (#{name}, #{type}, #{userId})
+    </insert>
+
+    <select id="findByUserId" resultType="com.z.finance.tracker.entity.Category">
+        SELECT * FROM categories
+        WHERE user_id = #{userId}
+        ORDER BY name ASC
+    </select>
+
+    <select id="findByUserIdAndType" resultType="com.z.finance.tracker.entity.Category">
+        SELECT * FROM categories
+        WHERE user_id = #{userId} AND type = #{type}
+        ORDER BY name ASC
+    </select>
+
+    <select id="findByNameAndType" resultType="com.z.finance.tracker.entity.Category">
+        SELECT * FROM categories
+        WHERE user_id = #{userId} AND name = #{name} AND type = #{type}
+        LIMIT 1
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM categories WHERE id = #{id} AND user_id = #{userId}
+    </delete>
+
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.z.finance.tracker.mapper.BudgetMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO budgets (user_id, category_id, limit_amount, month)
+        VALUES (#{userId}, #{categoryId}, #{limitAmount}, #{month})
+    </insert>
+
+    <update id="update">
+        UPDATE budgets
+        SET limit_amount = #{limitAmount}
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM budgets WHERE id = #{id} AND user_id = #{userId}
+    </delete>
+
+    <select id="findByUserAndMonth" resultType="com.z.finance.tracker.entity.Budget">
+        SELECT b.*, c.name as categoryName
+        FROM budgets b
+        LEFT JOIN categories c ON b.category_id = c.id
+        WHERE b.user_id = #{userId} AND b.month = #{month}
+    </select>
+
+    <select id="findByUserId" resultType="com.z.finance.tracker.entity.Budget">
+        SELECT b.*, c.name as categoryName
+        FROM budgets b
+        LEFT JOIN categories c ON b.category_id = c.id
+        WHERE b.user_id = #{userId}
+    </select>
+
+    <!-- Returns budget + actual spent for the month -->
+    <select id="getBudgetProgress" resultType="map">
+        SELECT
+        b.id,
+        b.limit_amount as budgetLimit,
+        b.month,
+        c.name as categoryName,
+        COALESCE(SUM(ABS(t.amount)), 0) as spent
+        FROM budgets b
+        LEFT JOIN categories c ON b.category_id = c.id
+        LEFT JOIN transactions t
+        ON t.category_id = b.category_id
+        AND t.user_id = b.user_id
+        AND DATE_FORMAT(t.date, '%Y-%m') = b.month
+        AND t.type = 'EXPENSE'
+        WHERE b.user_id = #{userId} AND b.month = #{month}
+        GROUP BY b.id, b.limit_amount, b.month, c.name
+    </select>
+
+</mapper>
