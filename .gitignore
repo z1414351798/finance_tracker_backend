@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Secrets — never commit these ###
+.env
+nginx/certs/*.pem
+nginx/certs/*.crt
+nginx/certs/*.key
+uploads/

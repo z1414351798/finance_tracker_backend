@@ -1,23 +1,24 @@
 package com.z.finance.tracker.controller;
 
+import com.z.finance.tracker.entity.Transaction;
 import com.z.finance.tracker.entity.User;
 import com.z.finance.tracker.mapper.UserMapper;
+import com.z.finance.tracker.service.MinioStorageService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import com.z.finance.tracker.service.MinioStorageService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.UUID;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/profile")
 public class ProfileController {
@@ -28,6 +29,82 @@ public class ProfileController {
     // Set this in application.properties: app.upload-dir=./uploads
     @Value("${app.upload-dir:./uploads}")
     private String uploadDir;
+
+    @Autowired private MinioStorageService minioStorage;
+
+    @PostMapping("/avatar")
+    public ResponseEntity<?> uploadAvatar(@RequestParam("image") MultipartFile file) {
+        User user = getCurrentUser();
+        if (user == null) return ResponseEntity.status(401).build();
+        if (file.isEmpty()) return ResponseEntity.badRequest().body("No file provided");
+
+        String contentType = file.getContentType();
+        if (contentType == null || !contentType.startsWith("image/")) {
+            return ResponseEntity.badRequest().body("File must be an image");
+        }
+
+        try {
+            // Delete old avatar
+            if (user.getProfileImageUrl() != null) {
+                minioStorage.delete(user.getProfileImageUrl());
+            }
+
+            // Build unique object name
+            String extension = getExtension(file.getOriginalFilename());
+            String objectName = "avatars/avatar_"
+                    + user.getId() + "_"
+                    + UUID.randomUUID()
+                    + extension;
+
+            // Upload to MinIO
+            String imageUrl = minioStorage.upload(file, objectName);
+
+            // Save URL to DB
+            user.setProfileImageUrl(imageUrl);
+            userMapper.updateProfile(user);
+
+            log.info("Avatar uploaded [userId={}, object={}]", user.getId(), objectName);
+            return ResponseEntity.ok(Map.of("profileImageUrl", imageUrl));
+
+        } catch (Exception e) {
+            log.error("Avatar upload failed [userId={}, error={}]", user.getId(), e.getMessage(), e);
+            return ResponseEntity.internalServerError()
+                    .body("Failed to upload image: " + e.getMessage());
+        }
+    }
+
+    // GET /api/profile/avatar  — authenticated image proxy
+    @GetMapping("/avatar")
+    public ResponseEntity<byte[]> getAvatar() {
+        User user = getCurrentUser();
+        if (user == null) return ResponseEntity.status(401).build();
+        if (user.getProfileImageUrl() == null) return ResponseEntity.notFound().build();
+        try {
+            byte[] bytes = minioStorage.getBytes(user.getProfileImageUrl());
+            String ct = MinioStorageService.contentTypeFor(user.getProfileImageUrl());
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(ct))
+                    .body(bytes);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping("/avatar-url")
+    public ResponseEntity<String> getTransactionImageUrl(@PathVariable Long id) {
+
+        User user = getCurrentUser();
+        if (user == null) return ResponseEntity.status(401).build();
+        if (user.getProfileImageUrl() == null) return ResponseEntity.notFound().build();
+
+        try {
+            String url = minioStorage.generatePresignedUrl(user.getProfileImageUrl());
+            return ResponseEntity.ok(url);
+        } catch (Exception e) {
+            log.error("Failed to generate url", e);
+            return ResponseEntity.internalServerError().build();
+        }
+    }
 
     // GET /api/profile
     @GetMapping
@@ -75,55 +152,8 @@ public class ProfileController {
         }
 
         userMapper.updatePassword(user.getId(), passwordEncoder.encode(newPassword));
+        log.info("Password changed [userId={}]", user.getId());
         return ResponseEntity.ok(Map.of("message", "Password updated successfully"));
-    }
-
-    // POST /api/profile/avatar
-    @PostMapping("/avatar")
-    public ResponseEntity<?> uploadAvatar(@RequestParam("image") MultipartFile file) {
-        User user = getCurrentUser();
-        if (user == null) return ResponseEntity.status(401).build();
-
-        if (file.isEmpty()) {
-            return ResponseEntity.badRequest().body("No file provided");
-        }
-
-        // Validate it's an image
-        String contentType = file.getContentType();
-        if (contentType == null || !contentType.startsWith("image/")) {
-            return ResponseEntity.badRequest().body("File must be an image");
-        }
-
-        try {
-            // Create upload directory if it doesn't exist
-            Path uploadPath = Paths.get(uploadDir);
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
-            }
-
-            // Delete old avatar if it exists and is a local file
-            if (user.getProfileImageUrl() != null && user.getProfileImageUrl().startsWith("/uploads/")) {
-                String oldFileName = user.getProfileImageUrl().replace("/uploads/", "");
-                Path oldFile = uploadPath.resolve(oldFileName);
-                Files.deleteIfExists(oldFile);
-            }
-
-            // Save new file with unique name
-            String extension = getExtension(file.getOriginalFilename());
-            String fileName = "avatar_" + user.getId() + "_" + UUID.randomUUID() + extension;
-            Path filePath = uploadPath.resolve(fileName);
-            file.transferTo(filePath.toFile());
-
-            // Save URL to DB (relative path, served as static resource)
-            String imageUrl = "/uploads/" + fileName;
-            user.setProfileImageUrl(imageUrl);
-            userMapper.updateProfile(user);
-
-            return ResponseEntity.ok(Map.of("profileImageUrl", imageUrl));
-
-        } catch (IOException e) {
-            return ResponseEntity.internalServerError().body("Failed to upload image");
-        }
     }
 
     private String getExtension(String filename) {
@@ -131,8 +161,16 @@ public class ProfileController {
         return filename.substring(filename.lastIndexOf("."));
     }
 
-    private User getCurrentUser() {
+    public User getCurrentUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userMapper.findByUsername(username);
+        User user = userMapper.findByUsername(username);
+        String presignedUrl = null;
+        try {
+            presignedUrl = minioStorage.generatePresignedUrl(user.getProfileImageUrl());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        user.setPresignedImageUrl(presignedUrl);
+        return user;
     }
 }

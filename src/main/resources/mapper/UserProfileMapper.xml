@@ -29,4 +29,8 @@
         WHERE id = #{id}
     </update>
 
+    <select id="findByEmail" resultType="com.z.finance.tracker.entity.User">
+        SELECT * FROM users WHERE email = #{email} LIMIT 1
+    </select>
+
 </mapper>

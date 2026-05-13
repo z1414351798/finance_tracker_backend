@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: finance-tracker
+
+#  cloud:
+#    vault:
+#      uri: http://127.0.0.1:8200
+#      authentication: approle
+#      app-role:
+#        role-id: ${VAULT_ROLE_ID}
+#        secret-id: ${VAULT_SECRET_ID}
+#
+#      kv:
+#        enabled: true
+#        backend: secret
+#        default-context: finance-tracker

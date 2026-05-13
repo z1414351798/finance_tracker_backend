@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Register Spring Boot's colour + exception converters so they work even
+         when Spring Cloud Bootstrap initialises logging before the main context -->
+    <conversionRule conversionWord="clr"
+                    converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+
+    <!-- ── Patterns ──────────────────────────────────────────────────────────── -->
+    <property name="LOG_DIR"     value="logs" />
+    <property name="APP_NAME"    value="finance-tracker" />
+
+    <!-- Coloured console pattern (dev only) -->
+    <property name="CONSOLE_PATTERN"
+              value="%clr(%d{HH:mm:ss.SSS}){faint} %clr(%5p) %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx" />
+
+    <!-- Plain file pattern (no ANSI codes) -->
+    <property name="FILE_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %-40.40logger{39} : %msg%n" />
+
+    <!-- ── Console appender (dev) ─────────────────────────────────────────────── -->
+    <springProfile name="dev">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>${CONSOLE_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <!-- ── Rolling file appender (dev + prod) ────────────────────────────────── -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/${APP_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- New file every day, keep 30 days -->
+            <fileNamePattern>${LOG_DIR}/${APP_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>500MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- ── Silence noisy libraries ───────────────────────────────────────────── -->
+    <logger name="org.springframework.security"         level="WARN" />
+    <logger name="org.springframework.web"              level="WARN" />
+    <logger name="org.mybatis"                          level="WARN" />
+    <logger name="com.zaxxer.hikari"                    level="WARN" />
+    <logger name="io.lettuce"                           level="WARN" />
+    <logger name="io.minio"                             level="WARN" />
+    <logger name="com.google.api"                       level="WARN" />
+    <logger name="org.springframework.cloud"            level="WARN" />
+
+    <!-- ── Our app: DEBUG in dev, INFO in prod ───────────────────────────────── -->
+    <springProfile name="dev">
+        <logger name="com.z.finance.tracker" level="DEBUG" />
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <logger name="com.z.finance.tracker" level="INFO" />
+        <root level="WARN">
+            <appender-ref ref="FILE" />
+        </root>
+    </springProfile>
+
+</configuration>

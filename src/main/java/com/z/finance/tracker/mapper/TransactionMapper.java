@@ -40,7 +40,7 @@ public interface TransactionMapper {
     );
 
     // Summary data for charts
-    Map<String, Double> getIncomeVsExpense(@Param("userId") Long userId);
+    Map<String, Object> getIncomeVsExpense(@Param("userId") Long userId);
 
     List<Map<String, Object>> getCategorySummary(@Param("userId") Long userId, @Param("type") TraType type);
 
@@ -60,4 +60,9 @@ public interface TransactionMapper {
     // Add these two method signatures:
     List<Map<String, Object>> getMonthlyBreakdown(@Param("userId") Long userId, @Param("months") int months);
     List<Map<String, Object>> getBiggestTransactions(@Param("userId") Long userId, @Param("limit") int limit);
+    void deleteById(@Param("id") Long id, @Param("userId") Long userId);
+    void updateImage(@Param("id") Long id,
+                     @Param("userId") Long userId,
+                     @Param("imageUrl") String imageUrl);
+    Transaction findById(@Param("id") Long id, @Param("userId") Long userId);
 }

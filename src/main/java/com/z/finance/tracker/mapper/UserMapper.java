@@ -11,4 +11,5 @@ public interface UserMapper {
     User findById(Long id);
     void updateProfile(User user);
     void updatePassword(@Param("id") Long id, @Param("password") String password);
+    User findByEmail(String email);
 }

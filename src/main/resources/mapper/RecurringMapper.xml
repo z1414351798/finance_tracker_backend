@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.z.finance.tracker.mapper.RecurringMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO recurring_transactions
+            (user_id, text, amount, type, category_id, frequency, next_due_date, is_active, note)
+        VALUES
+            (#{userId}, #{text}, #{amount}, #{type}, #{categoryId},
+             #{frequency}, #{nextDueDate}, #{isActive}, #{note})
+    </insert>
+
+    <update id="update">
+        UPDATE recurring_transactions
+        SET text          = #{text},
+            amount        = #{amount},
+            type          = #{type},
+            category_id   = #{categoryId},
+            frequency     = #{frequency},
+            next_due_date = #{nextDueDate},
+            is_active     = #{isActive},
+            note          = #{note}
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM recurring_transactions WHERE id = #{id} AND user_id = #{userId}
+    </delete>
+
+    <update id="updateNextDueDate">
+        UPDATE recurring_transactions
+        SET next_due_date = #{nextDueDate}
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+
+    <select id="findByUserId" resultType="com.z.finance.tracker.entity.RecurringTransaction">
+        SELECT r.*, c.name as categoryName
+        FROM recurring_transactions r
+        LEFT JOIN categories c ON r.category_id = c.id
+        WHERE r.user_id = #{userId} AND r.is_active = TRUE
+        ORDER BY r.next_due_date ASC
+    </select>
+
+    <!-- Transactions due within the next N days -->
+    <select id="findUpcoming" resultType="com.z.finance.tracker.entity.RecurringTransaction">
+        SELECT r.*, c.name as categoryName
+        FROM recurring_transactions r
+        LEFT JOIN categories c ON r.category_id = c.id
+        WHERE r.user_id = #{userId}
+          AND r.is_active = TRUE
+          AND r.next_due_date &lt;= DATE_ADD(CURDATE(), INTERVAL #{days} DAY)
+        ORDER BY r.next_due_date ASC
+    </select>
+
+    <!-- Detect recurring patterns from last 6 months of transactions.
+         Groups by name + rounded amount so slight price changes still match.
+         Returns rows that appear 2+ times with a regular interval (6–400 days). -->
+    <select id="detectPatterns" resultType="map">
+        SELECT
+            text,
+            type,
+            ROUND(AVG(ABS(amount)), 2)                                        AS avgAmount,
+            COUNT(*)                                                           AS occurrences,
+            ROUND(
+                DATEDIFF(MAX(date), MIN(date)) / GREATEST(COUNT(*) - 1, 1)
+            )                                                                  AS avgIntervalDays,
+            MAX(date)                                                          AS lastDate
+        FROM transactions
+        WHERE user_id = #{userId}
+          AND date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+        GROUP BY text, type, ROUND(ABS(amount) / 15) * 15
+        HAVING COUNT(*) >= 2
+           AND ROUND(
+                   DATEDIFF(MAX(date), MIN(date)) / GREATEST(COUNT(*) - 1, 1)
+               ) BETWEEN 6 AND 400
+        ORDER BY occurrences DESC, avgAmount DESC
+        LIMIT 20
+    </select>
+
+</mapper>

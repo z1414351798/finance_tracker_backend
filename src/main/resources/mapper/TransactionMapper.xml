@@ -3,8 +3,8 @@
 <mapper namespace="com.z.finance.tracker.mapper.TransactionMapper">
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO transactions(text, amount, category_id, date, user_id, type, note)
-        VALUES(#{text}, #{amount}, #{categoryId}, #{date}, #{userId}, #{type}, #{note})
+        INSERT INTO transactions(text, amount, category_id, date, user_id, type, note, image_url)
+        VALUES(#{text}, #{amount}, #{categoryId}, #{date}, #{userId}, #{type}, #{note}, #{imageUrl})
     </insert>
 
     <select id="findAllFiltered" resultType="com.z.finance.tracker.entity.Transaction">
@@ -117,7 +117,8 @@
         amount = #{amount},
         category_id = #{categoryId},
         date = #{date},
-        note = #{note}
+        note = #{note},
+        image_url = #{imageUrl}
         WHERE id = #{id} AND user_id = #{userId}
     </update>
 
@@ -183,4 +184,21 @@
         LIMIT #{limit}
     </select>
 
+    <delete id="deleteById">
+        DELETE FROM transactions
+        WHERE id = #{id} AND user_id = #{userId}
+    </delete>
+
+    <update id="updateImage">
+        UPDATE transactions
+        SET image_url = #{imageUrl}
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+
+    <select id="findById" resultType="com.z.finance.tracker.entity.Transaction">
+        SELECT t.*, c.name as categoryName
+        FROM transactions t
+        LEFT JOIN categories c ON t.category_id = c.id
+        WHERE t.id = #{id} AND t.user_id = #{userId}
+    </select>
 </mapper>
