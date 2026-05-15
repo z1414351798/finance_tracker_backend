@@ -2,7 +2,8 @@ package com.z.finance.tracker.service;
 
 import io.minio.*;
 import io.minio.http.Method;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
-@Slf4j
 @Service
 public class MinioStorageService {
+
+    private static final Logger log = LoggerFactory.getLogger(MinioStorageService.class);
 
     @Autowired
     private MinioClient minioClient;

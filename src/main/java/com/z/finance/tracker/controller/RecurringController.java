@@ -6,7 +6,8 @@ import com.z.finance.tracker.mapper.RecurringMapper;
 import com.z.finance.tracker.mapper.TransactionMapper;
 import com.z.finance.tracker.mapper.UserMapper;
 import com.z.finance.tracker.service.CacheInvalidationService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,10 +18,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
-@Slf4j
 @RestController
 @RequestMapping("/api/recurring")
 public class RecurringController {
+
+    private static final Logger log = LoggerFactory.getLogger(RecurringController.class);
 
     @Autowired private RecurringMapper recurringMapper;
     @Autowired private TransactionMapper transactionMapper;

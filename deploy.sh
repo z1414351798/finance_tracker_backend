@@ -1,30 +1,27 @@
 #!/bin/bash
 # ─────────────────────────────────────────────────────────────────────────────
-# deploy.sh  —  run on YOUR SERVER to update the backend image
-# Full first-time setup:  ./deploy.sh --first-time
-# Normal update:          ./deploy.sh
+# deploy.sh  —  run on YOUR SERVER (CentOS)
+#
+# First time:    bash deploy.sh --first-time
+# Normal update: bash deploy.sh
 # ─────────────────────────────────────────────────────────────────────────────
 set -e
 
-DOCKERHUB_USER="hoyi9749"
-IMAGE="$DOCKERHUB_USER/finance-tracker-backend"
+DOMAIN="www.wisefintrakr.com"
 
 if [ "$1" == "--first-time" ]; then
-    echo "🔐  Generating SSL certificates ..."
-    chmod +x nginx/gen-certs.sh && bash nginx/gen-certs.sh
-
-    echo "🚀  Starting all services for the first time ..."
+    echo "🚀  Starting all services ..."
     docker compose pull
     docker compose up -d
 
     echo ""
-    echo "✅  All services started!"
+    echo "✅  Done! Your app is live at https://$DOMAIN"
     docker compose ps
 else
     echo "📥  Pulling latest backend image ..."
     docker compose pull backend
 
-    echo "🔄  Restarting backend only ..."
+    echo "🔄  Restarting backend ..."
     docker compose up -d --no-deps backend
 
     echo ""

@@ -4,7 +4,8 @@ import com.z.finance.tracker.entity.Transaction;
 import com.z.finance.tracker.entity.User;
 import com.z.finance.tracker.mapper.UserMapper;
 import com.z.finance.tracker.service.MinioStorageService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import com.z.finance.tracker.service.MinioStorageService;
@@ -18,10 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
 import java.util.UUID;
 
-@Slf4j
 @RestController
 @RequestMapping("/api/profile")
 public class ProfileController {
+
+    private static final Logger log = LoggerFactory.getLogger(ProfileController.class);
 
     @Autowired private UserMapper userMapper;
     @Autowired private PasswordEncoder passwordEncoder;
@@ -164,13 +166,13 @@ public class ProfileController {
     public User getCurrentUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userMapper.findByUsername(username);
-        String presignedUrl = null;
-        try {
-            presignedUrl = minioStorage.generatePresignedUrl(user.getProfileImageUrl());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if (user.getProfileImageUrl() != null) {
+            try {
+                user.setPresignedImageUrl(minioStorage.generatePresignedUrl(user.getProfileImageUrl()));
+            } catch (Exception e) {
+                log.warn("Could not generate presigned avatar URL [userId={}]: {}", user.getId(), e.getMessage());
+            }
         }
-        user.setPresignedImageUrl(presignedUrl);
         return user;
     }
 }

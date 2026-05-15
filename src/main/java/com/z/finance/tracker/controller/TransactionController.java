@@ -9,7 +9,8 @@ import com.z.finance.tracker.mapper.UserMapper;
 import com.z.finance.tracker.service.CacheInvalidationService;
 import com.z.finance.tracker.service.MinioStorageService;
 import com.z.finance.tracker.service.TransactionService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
@@ -20,10 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
-@Slf4j
 @RestController
 @RequestMapping("/api/transactions")
 public class TransactionController {
+
+    private static final Logger log = LoggerFactory.getLogger(TransactionController.class);
 
     private final TransactionMapper transactionMapper;
     private final UserMapper userMapper;
