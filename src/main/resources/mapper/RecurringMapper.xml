@@ -78,4 +78,8 @@
         LIMIT 20
     </select>
 
+    <delete id="deleteByUserId">
+        DELETE FROM recurring_transactions WHERE user_id = #{userId}
+    </delete>
+
 </mapper>

@@ -37,4 +37,8 @@
         DELETE FROM savings_goals WHERE id = #{id} AND user_id = #{userId}
     </delete>
 
+    <delete id="deleteByUserId">
+        DELETE FROM savings_goals WHERE user_id = #{userId}
+    </delete>
+
 </mapper>

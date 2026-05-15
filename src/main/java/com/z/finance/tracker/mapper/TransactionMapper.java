@@ -65,4 +65,10 @@ public interface TransactionMapper {
                      @Param("userId") Long userId,
                      @Param("imageUrl") String imageUrl);
     Transaction findById(@Param("id") Long id, @Param("userId") Long userId);
+
+    /** Returns all image_url values for a user so they can be purged from MinIO */
+    List<String> findImageUrlsByUserId(@Param("userId") Long userId);
+
+    /** Bulk-delete all transactions belonging to a user */
+    void deleteByUserId(@Param("userId") Long userId);
 }

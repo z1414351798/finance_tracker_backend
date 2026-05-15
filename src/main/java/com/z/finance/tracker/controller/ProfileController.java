@@ -2,7 +2,7 @@ package com.z.finance.tracker.controller;
 
 import com.z.finance.tracker.entity.Transaction;
 import com.z.finance.tracker.entity.User;
-import com.z.finance.tracker.mapper.UserMapper;
+import com.z.finance.tracker.mapper.*;
 import com.z.finance.tracker.service.MinioStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -26,6 +27,12 @@ public class ProfileController {
     private static final Logger log = LoggerFactory.getLogger(ProfileController.class);
 
     @Autowired private UserMapper userMapper;
+    @Autowired private TransactionMapper transactionMapper;
+    @Autowired private CategoryMapper categoryMapper;
+    @Autowired private BudgetMapper budgetMapper;
+    @Autowired private GoalMapper goalMapper;
+    @Autowired private RecurringMapper recurringMapper;
+    @Autowired private ConsentMapper consentMapper;
     @Autowired private PasswordEncoder passwordEncoder;
 
     // Set this in application.properties: app.upload-dir=./uploads
@@ -156,6 +163,47 @@ public class ProfileController {
         userMapper.updatePassword(user.getId(), passwordEncoder.encode(newPassword));
         log.info("Password changed [userId={}]", user.getId());
         return ResponseEntity.ok(Map.of("message", "Password updated successfully"));
+    }
+
+    // DELETE /api/profile/account  — permanently delete account + all data
+    @DeleteMapping("/account")
+    public ResponseEntity<?> deleteAccount() {
+        User user = getCurrentUser();
+        if (user == null) return ResponseEntity.status(401).build();
+
+        Long userId = user.getId();
+        log.info("Account deletion requested [userId={}]", userId);
+
+        try {
+            // 1. Delete all MinIO objects: transaction receipt images
+            List<String> imageUrls = transactionMapper.findImageUrlsByUserId(userId);
+            for (String url : imageUrls) {
+                minioStorage.delete(url);
+            }
+
+            // 2. Delete avatar from MinIO
+            if (user.getProfileImageUrl() != null) {
+                minioStorage.delete(user.getProfileImageUrl());
+            }
+
+            // 3. Delete DB rows in safe order (budgets before categories due to FK)
+            budgetMapper.deleteByUserId(userId);
+            goalMapper.deleteByUserId(userId);
+            recurringMapper.deleteByUserId(userId);
+            transactionMapper.deleteByUserId(userId);
+            categoryMapper.deleteByUserId(userId);
+            consentMapper.deleteByUserId(userId);
+
+            // 4. Delete the user record
+            userMapper.deleteById(userId);
+
+            log.info("Account deleted [userId={}]", userId);
+            return ResponseEntity.ok(Map.of("message", "Account deleted successfully"));
+
+        } catch (Exception e) {
+            log.error("Account deletion failed [userId={}, error={}]", userId, e.getMessage(), e);
+            return ResponseEntity.internalServerError().body("Failed to delete account");
+        }
     }
 
     private String getExtension(String filename) {

@@ -13,4 +13,5 @@ public interface GoalMapper {
     void update(SavingsGoal goal);
     void addAmount(@Param("id") Long id, @Param("amount") Double amount);
     void deleteById(@Param("id") Long id, @Param("userId") Long userId);
+    void deleteByUserId(@Param("userId") Long userId);
 }

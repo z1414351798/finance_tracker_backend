@@ -12,4 +12,5 @@ public interface UserMapper {
     void updateProfile(User user);
     void updatePassword(@Param("id") Long id, @Param("password") String password);
     User findByEmail(String email);
+    void deleteById(@Param("id") Long id);
 }

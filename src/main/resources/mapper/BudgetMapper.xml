@@ -51,4 +51,8 @@
         GROUP BY b.id, b.limit_amount, b.month, c.name
     </select>
 
+    <delete id="deleteByUserId">
+        DELETE FROM budgets WHERE user_id = #{userId}
+    </delete>
+
 </mapper>

@@ -8,4 +8,5 @@ import java.util.List;
 public interface ConsentMapper {
     void insert(UserConsent consent);
     List<UserConsent> findByUserId(Long userId);
+    void deleteByUserId(Long userId);
 }

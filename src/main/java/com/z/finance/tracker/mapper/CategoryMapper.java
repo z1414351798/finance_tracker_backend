@@ -20,4 +20,5 @@ public interface CategoryMapper {
     void deleteById(@Param("id") Long id, @Param("userId") Long userId);
 
     List<Category> findByUserId(@Param("userId") Long userId);
+    void deleteByUserId(@Param("userId") Long userId);
 }

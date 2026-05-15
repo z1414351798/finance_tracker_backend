@@ -23,4 +23,5 @@ public interface RecurringMapper {
 
     /** Auto-detect: find transaction name/amount patterns that repeat regularly. */
     List<Map<String, Object>> detectPatterns(@Param("userId") Long userId);
+    void deleteByUserId(@Param("userId") Long userId);
 }

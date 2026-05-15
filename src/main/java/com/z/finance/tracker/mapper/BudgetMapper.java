@@ -16,4 +16,5 @@ public interface BudgetMapper {
     List<Budget> findByUserAndMonth(@Param("userId") Long userId, @Param("month") String month);
     List<Budget> findByUserId(@Param("userId") Long userId);
     List<Map<String, Object>> getBudgetProgress(@Param("userId") Long userId, @Param("month") String month);
+    void deleteByUserId(@Param("userId") Long userId);
 }

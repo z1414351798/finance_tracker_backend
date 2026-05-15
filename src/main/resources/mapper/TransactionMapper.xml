@@ -201,4 +201,13 @@
         LEFT JOIN categories c ON t.category_id = c.id
         WHERE t.id = #{id} AND t.user_id = #{userId}
     </select>
+
+    <select id="findImageUrlsByUserId" resultType="string">
+        SELECT image_url FROM transactions
+        WHERE user_id = #{userId} AND image_url IS NOT NULL AND image_url != ''
+    </select>
+
+    <delete id="deleteByUserId">
+        DELETE FROM transactions WHERE user_id = #{userId}
+    </delete>
 </mapper>

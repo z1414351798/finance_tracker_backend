@@ -29,4 +29,8 @@
         DELETE FROM categories WHERE id = #{id} AND user_id = #{userId}
     </delete>
 
+    <delete id="deleteByUserId">
+        DELETE FROM categories WHERE user_id = #{userId}
+    </delete>
+
 </mapper>

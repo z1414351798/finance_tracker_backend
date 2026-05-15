@@ -12,4 +12,8 @@
         SELECT * FROM user_consents WHERE user_id = #{userId} ORDER BY accepted_at DESC
     </select>
 
+    <delete id="deleteByUserId">
+        DELETE FROM user_consents WHERE user_id = #{userId}
+    </delete>
+
 </mapper>
