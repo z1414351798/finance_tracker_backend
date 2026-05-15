@@ -19,6 +19,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.http.HttpHeaders;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @RestController
@@ -230,6 +232,47 @@ public class TransactionController {
     public ResponseEntity<List<Map<String, Object>>> getBiggestTransactions(
             @RequestParam(defaultValue = "5") int limit) {
         return ResponseEntity.ok(transactionMapper.getBiggestTransactions(getCurrentUserId(), limit));
+    }
+
+    // GET /api/transactions/export/csv
+    @GetMapping("/export/csv")
+    public ResponseEntity<byte[]> exportCsv() {
+        Long userId = getCurrentUserId();
+        if (userId == null) return ResponseEntity.status(401).build();
+
+        List<Transaction> transactions = transactionMapper.findAllByUserId(userId);
+
+        StringBuilder csv = new StringBuilder();
+        csv.append("Date,Type,Name,Category,Amount,Note\n");
+        for (Transaction t : transactions) {
+            csv.append(escapeCsv(t.getDate())).append(",")
+               .append(escapeCsv(t.getType() != null ? t.getType().name() : "")).append(",")
+               .append(escapeCsv(t.getText())).append(",")
+               .append(escapeCsv(t.getCategoryName())).append(",")
+               .append(t.getAmount() != null ? t.getAmount() : "").append(",")
+               .append(escapeCsv(t.getNote())).append("\n");
+        }
+
+        byte[] bytes = csv.toString().getBytes(StandardCharsets.UTF_8);
+        // BOM so Excel opens it correctly
+        byte[] bom = new byte[]{(byte)0xEF, (byte)0xBB, (byte)0xBF};
+        byte[] output = new byte[bom.length + bytes.length];
+        System.arraycopy(bom, 0, output, 0, bom.length);
+        System.arraycopy(bytes, 0, output, bom.length, bytes.length);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"transactions.csv\"")
+                .contentType(MediaType.parseMediaType("text/csv; charset=UTF-8"))
+                .body(output);
+    }
+
+    private String escapeCsv(String value) {
+        if (value == null) return "";
+        // Wrap in quotes if contains comma, quote, or newline
+        if (value.contains(",") || value.contains("\"") || value.contains("\n")) {
+            return "\"" + value.replace("\"", "\"\"") + "\"";
+        }
+        return value;
     }
 
     private String getExtension(String filename) {

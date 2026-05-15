@@ -71,4 +71,7 @@ public interface TransactionMapper {
 
     /** Bulk-delete all transactions belonging to a user */
     void deleteByUserId(@Param("userId") Long userId);
+
+    /** All transactions for a user ordered by date desc — used for CSV export */
+    List<Transaction> findAllByUserId(@Param("userId") Long userId);
 }
