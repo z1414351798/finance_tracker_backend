@@ -38,3 +38,5 @@ nginx/certs/*.pem
 nginx/certs/*.crt
 nginx/certs/*.key
 uploads/
+
+logs/

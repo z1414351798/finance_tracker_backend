@@ -3,12 +3,10 @@ package com.z.finance.tracker.controller;
 import com.z.finance.tracker.entity.Transaction;
 import com.z.finance.tracker.entity.User;
 import com.z.finance.tracker.mapper.*;
-import com.z.finance.tracker.service.MinioStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import com.z.finance.tracker.service.MinioStorageService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,82 +36,6 @@ public class ProfileController {
     // Set this in application.properties: app.upload-dir=./uploads
     @Value("${app.upload-dir:./uploads}")
     private String uploadDir;
-
-    @Autowired private MinioStorageService minioStorage;
-
-    @PostMapping("/avatar")
-    public ResponseEntity<?> uploadAvatar(@RequestParam("image") MultipartFile file) {
-        User user = getCurrentUser();
-        if (user == null) return ResponseEntity.status(401).build();
-        if (file.isEmpty()) return ResponseEntity.badRequest().body("No file provided");
-
-        String contentType = file.getContentType();
-        if (contentType == null || !contentType.startsWith("image/")) {
-            return ResponseEntity.badRequest().body("File must be an image");
-        }
-
-        try {
-            // Delete old avatar
-            if (user.getProfileImageUrl() != null) {
-                minioStorage.delete(user.getProfileImageUrl());
-            }
-
-            // Build unique object name
-            String extension = getExtension(file.getOriginalFilename());
-            String objectName = "avatars/avatar_"
-                    + user.getId() + "_"
-                    + UUID.randomUUID()
-                    + extension;
-
-            // Upload to MinIO
-            String imageUrl = minioStorage.upload(file, objectName);
-
-            // Save URL to DB
-            user.setProfileImageUrl(imageUrl);
-            userMapper.updateProfile(user);
-
-            log.info("Avatar uploaded [userId={}, object={}]", user.getId(), objectName);
-            return ResponseEntity.ok(Map.of("profileImageUrl", imageUrl));
-
-        } catch (Exception e) {
-            log.error("Avatar upload failed [userId={}, error={}]", user.getId(), e.getMessage(), e);
-            return ResponseEntity.internalServerError()
-                    .body("Failed to upload image: " + e.getMessage());
-        }
-    }
-
-    // GET /api/profile/avatar  — authenticated image proxy
-    @GetMapping("/avatar")
-    public ResponseEntity<byte[]> getAvatar() {
-        User user = getCurrentUser();
-        if (user == null) return ResponseEntity.status(401).build();
-        if (user.getProfileImageUrl() == null) return ResponseEntity.notFound().build();
-        try {
-            byte[] bytes = minioStorage.getBytes(user.getProfileImageUrl());
-            String ct = MinioStorageService.contentTypeFor(user.getProfileImageUrl());
-            return ResponseEntity.ok()
-                    .contentType(MediaType.parseMediaType(ct))
-                    .body(bytes);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
-    }
-
-    @GetMapping("/avatar-url")
-    public ResponseEntity<String> getTransactionImageUrl(@PathVariable Long id) {
-
-        User user = getCurrentUser();
-        if (user == null) return ResponseEntity.status(401).build();
-        if (user.getProfileImageUrl() == null) return ResponseEntity.notFound().build();
-
-        try {
-            String url = minioStorage.generatePresignedUrl(user.getProfileImageUrl());
-            return ResponseEntity.ok(url);
-        } catch (Exception e) {
-            log.error("Failed to generate url", e);
-            return ResponseEntity.internalServerError().build();
-        }
-    }
 
     // GET /api/profile
     @GetMapping
@@ -175,16 +97,6 @@ public class ProfileController {
         log.info("Account deletion requested [userId={}]", userId);
 
         try {
-            // 1. Delete all MinIO objects: transaction receipt images
-            List<String> imageUrls = transactionMapper.findImageUrlsByUserId(userId);
-            for (String url : imageUrls) {
-                minioStorage.delete(url);
-            }
-
-            // 2. Delete avatar from MinIO
-            if (user.getProfileImageUrl() != null) {
-                minioStorage.delete(user.getProfileImageUrl());
-            }
 
             // 3. Delete DB rows in safe order (budgets before categories due to FK)
             budgetMapper.deleteByUserId(userId);
@@ -214,13 +126,6 @@ public class ProfileController {
     public User getCurrentUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userMapper.findByUsername(username);
-        if (user.getProfileImageUrl() != null) {
-            try {
-                user.setPresignedImageUrl(minioStorage.generatePresignedUrl(user.getProfileImageUrl()));
-            } catch (Exception e) {
-                log.warn("Could not generate presigned avatar URL [userId={}]: {}", user.getId(), e.getMessage());
-            }
-        }
         return user;
     }
 }

@@ -7,7 +7,6 @@ import com.z.finance.tracker.enums.TraType;
 import com.z.finance.tracker.mapper.TransactionMapper;
 import com.z.finance.tracker.mapper.UserMapper;
 import com.z.finance.tracker.service.CacheInvalidationService;
-import com.z.finance.tracker.service.MinioStorageService;
 import com.z.finance.tracker.service.TransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +33,6 @@ public class TransactionController {
 
     @Autowired private TransactionService transactionService;
     @Autowired private CacheInvalidationService cacheInvalidation;
-    @Autowired private MinioStorageService minioStorage;
 
     public TransactionController(TransactionMapper transactionMapper, UserMapper userMapper) {
         this.transactionMapper = transactionMapper;
@@ -74,91 +72,6 @@ public class TransactionController {
         return ResponseEntity.ok(Map.of("message", "Deleted successfully"));
     }
 
-    @PostMapping("/{id}/image")
-    public ResponseEntity<?> uploadTransactionImage(
-            @PathVariable Long id,
-            @RequestParam("image") MultipartFile file) {
-        Long userId = getCurrentUserId();
-
-        if (file.isEmpty()) return ResponseEntity.badRequest().body("No file");
-        String contentType = file.getContentType();
-        if (contentType == null || !contentType.startsWith("image/")) {
-            return ResponseEntity.badRequest().body("File must be an image");
-        }
-
-        try {
-            Transaction existing = transactionMapper.findById(id, userId);
-            if (existing != null && existing.getImageUrl() != null) {
-                minioStorage.delete(existing.getImageUrl());
-            }
-
-            String extension = getExtension(file.getOriginalFilename());
-            String objectName = "transactions/tx_" + id + "_" + UUID.randomUUID() + extension;
-            String imageUrl = minioStorage.upload(file, objectName);
-
-            transactionMapper.updateImage(id, userId, imageUrl);
-            cacheInvalidation.evictAllUserCaches(userId);
-
-            log.info("Image uploaded [userId={}, txId={}, object={}]", userId, id, objectName);
-            return ResponseEntity.ok(Map.of("imageUrl", imageUrl));
-        } catch (Exception e) {
-            log.error("Image upload failed [userId={}, txId={}, error={}]", userId, id, e.getMessage(), e);
-            return ResponseEntity.internalServerError().body("Upload failed: " + e.getMessage());
-        }
-    }
-
-    @DeleteMapping("/{id}/image")
-    public ResponseEntity<?> deleteTransactionImage(@PathVariable Long id) {
-        Long userId = getCurrentUserId();
-        try {
-            Transaction existing = transactionMapper.findById(id, userId);
-            if (existing != null && existing.getImageUrl() != null) {
-                minioStorage.delete(existing.getImageUrl());
-                transactionMapper.updateImage(id, userId, null);
-                cacheInvalidation.evictAllUserCaches(userId);
-                log.info("Transaction image deleted [userId={}, txId={}]", userId, id);
-            }
-            return ResponseEntity.ok(Map.of("message", "Image deleted"));
-        } catch (Exception e) {
-            log.error("Image delete failed [userId={}, txId={}, error={}]", userId, id, e.getMessage());
-            return ResponseEntity.internalServerError().body("Delete failed");
-        }
-    }
-
-    @GetMapping("/{id}/image")
-    public ResponseEntity<byte[]> getTransactionImage(@PathVariable Long id) {
-        Long userId = getCurrentUserId();
-        Transaction tx = transactionMapper.findById(id, userId);
-        if (tx == null || tx.getImageUrl() == null) return ResponseEntity.notFound().build();
-        try {
-            byte[] bytes = minioStorage.getBytes(tx.getImageUrl());
-            String ct = MinioStorageService.contentTypeFor(tx.getImageUrl());
-            return ResponseEntity.ok().contentType(MediaType.parseMediaType(ct)).body(bytes);
-        } catch (Exception e) {
-            log.error("Image fetch failed [userId={}, txId={}, error={}]", userId, id, e.getMessage());
-            return ResponseEntity.internalServerError().build();
-        }
-    }
-
-    @GetMapping("/{id}/image-url")
-    public ResponseEntity<String> getTransactionImageUrl(@PathVariable Long id) {
-
-        Long userId = getCurrentUserId();
-
-        Transaction tx = transactionMapper.findById(id, userId);
-
-        if (tx == null || tx.getImageUrl() == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        try {
-            String url = minioStorage.generatePresignedUrl(tx.getImageUrl());
-            return ResponseEntity.ok(url);
-        } catch (Exception e) {
-            log.error("Failed to generate url", e);
-            return ResponseEntity.internalServerError().build();
-        }
-    }
 
     @GetMapping("/history")
     public Map<String, Object> getHistory(
@@ -179,17 +92,6 @@ public class TransactionController {
         List<Transaction> list = transactionMapper.findAllFiltered(
                 userId, offset, size, text, categoryId, type,
                 minAmount, maxAmount, startDate, endDate, note);
-
-        // Attach presigned URLs — Android loads images directly via nginx→MinIO (fast)
-        for (Transaction tx : list) {
-            if (tx.getImageUrl() != null) {
-                try {
-                    tx.setImagePresignedUrl(minioStorage.generatePresignedUrl(tx.getImageUrl()));
-                } catch (Exception e) {
-                    log.warn("Could not generate presigned URL for tx={}: {}", tx.getId(), e.getMessage());
-                }
-            }
-        }
 
         long total = transactionMapper.countFiltered(
                 userId, text, categoryId, type,

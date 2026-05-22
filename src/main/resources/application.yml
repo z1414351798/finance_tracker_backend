@@ -34,6 +34,4 @@ server:
 minio:
   bucket: finance-tracker
 
-google:
-  client-id: ${GOOGLE_CLIENT_ID}
 
