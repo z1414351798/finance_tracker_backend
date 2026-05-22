@@ -25,10 +25,6 @@ docker run -d \
   -e MYSQL_PASSWORD="Zz7763882336^" \
   -e SPRING_DATA_REDIS_HOST="host.docker.internal" \
   -e REDIS_PASSWORD="Zz7763882336^" \
-  -e MINIO_ENDPOINT="http://host.docker.internal:9000" \
-  -e MINIO_ACCESS_KEY="minioadmin" \
-  -e MINIO_SECRET_KEY="minioadmin" \
-  -e MINIO_PUBLIC_URL="https://nontoxically-unhumiliating-shoshana.ngrok-free.dev" \
   -e JWT_SECRET="dev-secret-key-at-least-32-characters-long!!" \
   -e GOOGLE_CLIENT_ID="180806298382-q7ofrc16oqep2k7jsd5budl10o1qkqn6.apps.googleusercontent.com" \
   $IMAGE
