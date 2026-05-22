@@ -1996,3 +1996,566 @@
 2026-05-13 18:17:38.212 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m58s139ms).
 2026-05-13 18:34:44.542 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m6s330ms).
 2026-05-13 18:53:06.759 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-22 18:15:47.127 [main] INFO  c.z.f.tracker.FinanceTrackerApplication  : The following 1 profile is active: "dev"
+2026-05-22 18:15:47.980 [main] INFO  .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-22 18:15:47.986 [main] INFO  .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-22 18:15:48.020 [main] INFO  .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
+2026-05-22 18:15:48.884 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-22 18:15:48.902 [main] INFO  o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-8080"]
+2026-05-22 18:15:48.905 [main] INFO  o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-22 18:15:48.906 [main] INFO  o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.49]
+2026-05-22 18:15:48.971 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-22 18:15:48.971 [main] INFO  w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1815 ms
+2026-05-22 18:15:49.043 [main] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-22 18:15:50.808 [main] INFO  o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-8080"]
+2026-05-22 18:15:50.853 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-05-22 18:15:50.870 [main] INFO  c.z.f.tracker.FinanceTrackerApplication  : Started FinanceTrackerApplication in 5.617 seconds (process running for 6.714)
+2026-05-22 18:18:02.356 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-22 18:18:02.559 [http-nio-8080-exec-1] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/transactions/summary, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:02.596 [http-nio-8080-exec-2] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/transactions/summary, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:02.596 [http-nio-8080-exec-3] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/transactions/history, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:02.607 [http-nio-8080-exec-4] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/transactions/history, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:05.622 [http-nio-8080-exec-5] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/consent, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:06.985 [http-nio-8080-exec-6] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/profile, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:06.994 [http-nio-8080-exec-7] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/profile, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:19.209 [http-nio-8080-exec-8] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/transactions/summary, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:19.219 [http-nio-8080-exec-9] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/transactions/summary, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:19.225 [http-nio-8080-exec-10] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/transactions/history, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:19.237 [http-nio-8080-exec-1] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/transactions/history, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:27.492 [http-nio-8080-exec-3] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/profile, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:27.499 [http-nio-8080-exec-2] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/profile, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:34.755 [http-nio-8080-exec-4] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/categories, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:34.764 [http-nio-8080-exec-5] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/categories, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:35.384 [http-nio-8080-exec-6] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/transactions/summary, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:35.393 [http-nio-8080-exec-7] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/transactions/summary, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:35.393 [http-nio-8080-exec-8] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/transactions/history, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:35.404 [http-nio-8080-exec-9] WARN  c.z.f.t.filter.JwtAuthenticationFilter   : JWT processing error [uri=/api/transactions/history, error=JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.]
+2026-05-22 18:18:38.330 [http-nio-8080-exec-10] DEBUG c.z.f.tracker.controller.AuthController  : Login attempt: [username=Andy]
+2026-05-22 18:18:38.614 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:18:38.647 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:18:38.706 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:18:38.836 [http-nio-8080-exec-10] INFO  c.z.f.tracker.controller.AuthController  : Login success: [username=Andy]
+2026-05-22 18:18:38.859 [http-nio-8080-exec-1] INFO  o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1779445118657,"i_b":"66yYJ6F6dGseIN+kic9T3N3EPhf5GYO01D3Z62+X428","i_e":{"enable_itp_optimization":0},"i_et":1779445118657}] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2026-05-22 18:18:38.867 [http-nio-8080-exec-1] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/consent]
+2026-05-22 18:18:38.873 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:18:38.873 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:18:38.875 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:18:38.877 [http-nio-8080-exec-1] DEBUG c.z.f.t.mapper.ConsentMapper.insert      : ==>  Preparing: INSERT INTO user_consents (user_id, policy_version, platform, ip_address, accepted_at) VALUES (?, ?, ?, ?, ?)
+2026-05-22 18:18:38.882 [http-nio-8080-exec-1] DEBUG c.z.f.t.mapper.ConsentMapper.insert      : ==> Parameters: 1(Long), 2026-05(String), web(String), 127.0.0.1(String), 2026-05-22T18:18:38.876079(LocalDateTime)
+2026-05-22 18:18:38.897 [http-nio-8080-exec-1] DEBUG c.z.f.t.mapper.ConsentMapper.insert      : <==    Updates: 1
+2026-05-22 18:18:38.900 [http-nio-8080-exec-1] INFO  c.z.f.t.controller.ConsentController     : Consent recorded [userId=1, platform=web, version=2026-05]
+2026-05-22 18:18:38.933 [http-nio-8080-exec-3] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:18:38.948 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:18:38.948 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:18:38.950 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:18:39.431 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getTotalBalance              : ==>  Preparing: SELECT COALESCE( SUM(CASE WHEN type = 'INCOME' THEN amount ELSE ABS(amount) * -1 END), 0 ) FROM transactions WHERE user_id = ?
+2026-05-22 18:18:39.432 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getTotalBalance              : ==> Parameters: 1(Long)
+2026-05-22 18:18:39.444 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getTotalBalance              : <==      Total: 1
+2026-05-22 18:18:39.445 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getMonthlyBalance            : ==>  Preparing: SELECT SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) as income, SUM(CASE WHEN type = 'EXPENSE' THEN ABS(amount) ELSE 0 END) as expense, SUM(CASE WHEN type = 'INCOME' THEN amount ELSE ABS(amount) * -1 END) as net FROM transactions WHERE user_id = ? AND DATE_FORMAT(date, '%Y-%m') = ?
+2026-05-22 18:18:39.445 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getMonthlyBalance            : ==> Parameters: 1(Long), 2026-05(String)
+2026-05-22 18:18:39.447 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getMonthlyBalance            : <==      Total: 1
+2026-05-22 18:18:39.448 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getIncomeVsExpense           : ==>  Preparing: SELECT SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) as totalIncome, SUM(CASE WHEN type = 'EXPENSE' THEN ABS(amount) ELSE 0 END) as totalExpense FROM transactions WHERE user_id = ?
+2026-05-22 18:18:39.449 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getIncomeVsExpense           : ==> Parameters: 1(Long)
+2026-05-22 18:18:39.450 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getIncomeVsExpense           : <==      Total: 1
+2026-05-22 18:18:39.451 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getCategorySummary           : ==>  Preparing: SELECT c.name as name, SUM(ABS(t.amount)) as value FROM transactions t INNER JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? AND t.type = ? GROUP BY c.name
+2026-05-22 18:18:39.452 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getCategorySummary           : ==> Parameters: 1(Long), INCOME(String)
+2026-05-22 18:18:39.460 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getCategorySummary           : <==      Total: 4
+2026-05-22 18:18:39.461 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getCategorySummary           : ==>  Preparing: SELECT c.name as name, SUM(ABS(t.amount)) as value FROM transactions t INNER JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? AND t.type = ? GROUP BY c.name
+2026-05-22 18:18:39.462 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getCategorySummary           : ==> Parameters: 1(Long), EXPENSE(String)
+2026-05-22 18:18:39.464 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getCategorySummary           : <==      Total: 7
+2026-05-22 18:18:39.516 [http-nio-8080-exec-4] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:18:39.516 [http-nio-8080-exec-2] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:18:39.517 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:18:39.517 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:18:39.520 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:18:39.525 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:18:39.526 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:18:39.527 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:18:39.556 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:18:39.558 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 5(Integer), 0(Integer)
+2026-05-22 18:18:39.566 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 5
+2026-05-22 18:18:39.567 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:18:39.567 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:18:39.570 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:18:39.570 [http-nio-8080-exec-4] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=5, total=32]
+2026-05-22 18:18:39.584 [http-nio-8080-exec-5] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:18:39.586 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:18:39.586 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:18:39.588 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:18:39.589 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:18:39.590 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 5(Integer), 0(Integer)
+2026-05-22 18:18:39.595 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 5
+2026-05-22 18:18:39.596 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:18:39.597 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:18:39.599 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:18:39.599 [http-nio-8080-exec-5] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=5, total=32]
+2026-05-22 18:18:42.527 [http-nio-8080-exec-6] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/profile]
+2026-05-22 18:18:42.529 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:18:42.529 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:18:42.531 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:18:42.542 [http-nio-8080-exec-8] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/profile]
+2026-05-22 18:18:42.543 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:18:42.544 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:18:42.547 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:18:58.825 [http-nio-8080-exec-7] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:18:58.827 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:18:58.828 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:18:58.830 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:18:58.842 [http-nio-8080-exec-10] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:18:58.842 [http-nio-8080-exec-9] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:18:58.843 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:18:58.843 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:18:58.844 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:18:58.844 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:18:58.845 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:18:58.846 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:18:58.847 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:18:58.847 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 5(Integer), 0(Integer)
+2026-05-22 18:18:58.852 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 5
+2026-05-22 18:18:58.853 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:18:58.853 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:18:58.855 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:18:58.855 [http-nio-8080-exec-10] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=5, total=32]
+2026-05-22 18:18:58.864 [http-nio-8080-exec-1] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:18:58.866 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:18:58.866 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:18:58.868 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:18:58.868 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:18:58.869 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 5(Integer), 0(Integer)
+2026-05-22 18:18:58.873 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 5
+2026-05-22 18:18:58.874 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:18:58.874 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:18:58.876 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:18:58.876 [http-nio-8080-exec-1] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=5, total=32]
+2026-05-22 18:19:01.194 [http-nio-8080-exec-3] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/categories]
+2026-05-22 18:19:01.197 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:01.197 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:01.199 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:01.202 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.C.findByUserIdAndType          : ==>  Preparing: SELECT * FROM categories WHERE user_id = ? AND type = ? ORDER BY name ASC
+2026-05-22 18:19:01.203 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.C.findByUserIdAndType          : ==> Parameters: 1(Long), EXPENSE(String)
+2026-05-22 18:19:01.208 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.C.findByUserIdAndType          : <==      Total: 10
+2026-05-22 18:19:01.223 [http-nio-8080-exec-2] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/categories]
+2026-05-22 18:19:01.223 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:01.224 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:01.226 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:02.858 [http-nio-8080-exec-4] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:19:02.860 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:02.861 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:02.864 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:02.876 [http-nio-8080-exec-5] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:19:02.877 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:02.877 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:02.879 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:02.901 [http-nio-8080-exec-6] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/trends]
+2026-05-22 18:19:02.902 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:02.902 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:02.904 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:02.909 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.T.getTimeSeriesData            : ==>  Preparing: SELECT DATE_FORMAT(date, '%Y-%m-%d') as timeLabel, SUM(ABS(amount)) as total FROM transactions WHERE user_id = ? AND type = ? GROUP BY timeLabel ORDER BY timeLabel ASC
+2026-05-22 18:19:02.910 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.T.getTimeSeriesData            : ==> Parameters: 1(Long), EXPENSE(String)
+2026-05-22 18:19:02.913 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.T.getTimeSeriesData            : <==      Total: 18
+2026-05-22 18:19:02.925 [http-nio-8080-exec-8] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/trends]
+2026-05-22 18:19:02.926 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:02.927 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:02.928 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:06.487 [http-nio-8080-exec-9] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:19:06.487 [http-nio-8080-exec-7] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/categories/getAllByUserId]
+2026-05-22 18:19:06.489 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:06.489 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:06.489 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:06.489 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:06.491 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:06.491 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:06.492 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:19:06.492 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 15(Integer), 0(Integer)
+2026-05-22 18:19:06.494 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.CategoryMapper.findByUserId    : ==>  Preparing: SELECT * FROM categories WHERE user_id = ? ORDER BY name ASC
+2026-05-22 18:19:06.494 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.CategoryMapper.findByUserId    : ==> Parameters: 1(Long)
+2026-05-22 18:19:06.498 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.CategoryMapper.findByUserId    : <==      Total: 15
+2026-05-22 18:19:06.499 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 15
+2026-05-22 18:19:06.499 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:19:06.500 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:19:06.501 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:19:06.502 [http-nio-8080-exec-9] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=15, total=32]
+2026-05-22 18:19:06.512 [http-nio-8080-exec-10] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/categories/getAllByUserId]
+2026-05-22 18:19:06.512 [http-nio-8080-exec-1] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:19:06.513 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:06.513 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:06.513 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:06.514 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:06.515 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:06.515 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:06.516 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:19:06.516 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 15(Integer), 0(Integer)
+2026-05-22 18:19:06.523 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 15
+2026-05-22 18:19:06.524 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:19:06.524 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:19:06.526 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:19:06.526 [http-nio-8080-exec-1] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=15, total=32]
+2026-05-22 18:19:09.280 [http-nio-8080-exec-3] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:19:09.282 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:09.282 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:09.284 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:09.319 [http-nio-8080-exec-2] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:19:09.320 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:09.320 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:09.322 [http-nio-8080-exec-4] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/trends]
+2026-05-22 18:19:09.323 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:09.323 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:09.324 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:09.326 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:09.340 [http-nio-8080-exec-5] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/trends]
+2026-05-22 18:19:09.341 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:09.341 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:09.343 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:13.772 [http-nio-8080-exec-6] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/trends]
+2026-05-22 18:19:13.774 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:13.774 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:13.776 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:13.777 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.T.getTimeSeriesData            : ==>  Preparing: SELECT DATE_FORMAT(date, '%Y-%m-%d') as timeLabel, SUM(ABS(amount)) as total FROM transactions WHERE user_id = ? AND type = ? GROUP BY timeLabel ORDER BY timeLabel ASC
+2026-05-22 18:19:13.778 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.T.getTimeSeriesData            : ==> Parameters: 1(Long), INCOME(String)
+2026-05-22 18:19:13.780 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.T.getTimeSeriesData            : <==      Total: 9
+2026-05-22 18:19:16.308 [http-nio-8080-exec-8] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/trends]
+2026-05-22 18:19:16.311 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:16.311 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:16.314 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:20.233 [http-nio-8080-exec-7] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/recurring]
+2026-05-22 18:19:20.234 [http-nio-8080-exec-9] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/categories/getAllByUserId]
+2026-05-22 18:19:20.235 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:20.235 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:20.236 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:20.236 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:20.238 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:20.238 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:20.239 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.RecurringMapper.findByUserId   : ==>  Preparing: SELECT r.*, c.name as categoryName FROM recurring_transactions r LEFT JOIN categories c ON r.category_id = c.id WHERE r.user_id = ? AND r.is_active = TRUE ORDER BY r.next_due_date ASC
+2026-05-22 18:19:20.239 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.RecurringMapper.findByUserId   : ==> Parameters: 1(Long)
+2026-05-22 18:19:20.246 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.RecurringMapper.findByUserId   : <==      Total: 0
+2026-05-22 18:19:20.250 [http-nio-8080-exec-10] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/categories/getAllByUserId]
+2026-05-22 18:19:20.251 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:20.251 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:20.253 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:20.255 [http-nio-8080-exec-1] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/recurring]
+2026-05-22 18:19:20.255 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:20.256 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:20.257 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:20.258 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.RecurringMapper.findByUserId   : ==>  Preparing: SELECT r.*, c.name as categoryName FROM recurring_transactions r LEFT JOIN categories c ON r.category_id = c.id WHERE r.user_id = ? AND r.is_active = TRUE ORDER BY r.next_due_date ASC
+2026-05-22 18:19:20.259 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.RecurringMapper.findByUserId   : ==> Parameters: 1(Long)
+2026-05-22 18:19:20.261 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.RecurringMapper.findByUserId   : <==      Total: 0
+2026-05-22 18:19:21.485 [http-nio-8080-exec-3] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:19:21.486 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:21.487 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:21.489 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:21.499 [http-nio-8080-exec-2] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:19:21.500 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:21.500 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:21.502 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:34.082 [http-nio-8080-exec-4] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/daily-trends]
+2026-05-22 18:19:34.088 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:34.088 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:34.091 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:34.095 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.getDailyTrends               : ==>  Preparing: SELECT DATE(t.date) as date, SUM(CASE WHEN t.type = 'INCOME' THEN t.amount ELSE 0 END) as income, SUM(CASE WHEN t.type = 'EXPENSE' THEN t.amount ELSE 0 END) as expense FROM transactions t WHERE t.user_id = ? AND t.date >= DATE_SUB(CURDATE(), INTERVAL ? DAY) GROUP BY DATE(t.date) ORDER BY date ASC
+2026-05-22 18:19:34.096 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.getDailyTrends               : ==> Parameters: 1(Long), 30(Integer)
+2026-05-22 18:19:34.100 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.getDailyTrends               : <==      Total: 6
+2026-05-22 18:19:34.117 [http-nio-8080-exec-5] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/daily-trends]
+2026-05-22 18:19:34.118 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:34.119 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:34.121 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:43.409 [http-nio-8080-exec-6] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/profile]
+2026-05-22 18:19:43.412 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:43.412 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:43.414 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:19:43.422 [http-nio-8080-exec-8] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/profile]
+2026-05-22 18:19:43.422 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:19:43.423 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:19:43.425 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:22:32.178 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-22 18:22:34.189 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-05-22 18:40:07.435 [main] INFO  c.z.f.tracker.FinanceTrackerApplication  : The following 1 profile is active: "dev"
+2026-05-22 18:40:09.004 [main] INFO  .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-22 18:40:09.010 [main] INFO  .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-22 18:40:09.085 [main] INFO  .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 37 ms. Found 0 Redis repository interfaces.
+2026-05-22 18:40:10.213 [main] INFO  c.z.f.tracker.FinanceTrackerApplication  : The following 1 profile is active: "dev"
+2026-05-22 18:40:11.044 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-22 18:40:11.089 [main] INFO  o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-8080"]
+2026-05-22 18:40:11.093 [main] INFO  o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-22 18:40:11.093 [main] INFO  o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.49]
+2026-05-22 18:40:11.227 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-22 18:40:11.227 [main] INFO  w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3754 ms
+2026-05-22 18:40:11.382 [main] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-22 18:40:11.593 [main] INFO  .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-22 18:40:11.602 [main] INFO  .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-22 18:40:11.661 [main] INFO  .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
+2026-05-22 18:40:13.188 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-22 18:40:13.221 [main] INFO  o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-8080"]
+2026-05-22 18:40:13.224 [main] INFO  o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-22 18:40:13.225 [main] INFO  o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.49]
+2026-05-22 18:40:13.367 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-22 18:40:13.367 [main] INFO  w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3095 ms
+2026-05-22 18:40:13.667 [main] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-22 18:40:15.135 [main] INFO  o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-8080"]
+2026-05-22 18:40:15.199 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-05-22 18:40:15.245 [main] INFO  c.z.f.tracker.FinanceTrackerApplication  : Started FinanceTrackerApplication in 11.399 seconds (process running for 13.434)
+2026-05-22 18:40:16.953 [main] INFO  o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-8080"]
+2026-05-22 18:40:16.997 [main] WARN  ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-05-22 18:40:17.014 [main] INFO  o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-05-22 18:40:17.036 [main] INFO  .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-22 18:40:17.085 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2026-05-22 18:40:31.315 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-22 18:40:38.523 [main] INFO  c.z.f.tracker.FinanceTrackerApplication  : The following 1 profile is active: "dev"
+2026-05-22 18:40:39.690 [main] INFO  .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-22 18:40:39.695 [main] INFO  .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-22 18:40:39.752 [main] INFO  .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
+2026-05-22 18:40:41.674 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-22 18:40:41.720 [main] INFO  o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-8080"]
+2026-05-22 18:40:41.734 [main] INFO  o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-22 18:40:41.734 [main] INFO  o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.49]
+2026-05-22 18:40:41.880 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-22 18:40:41.881 [main] INFO  w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3323 ms
+2026-05-22 18:40:42.056 [main] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-22 18:40:46.750 [main] INFO  o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-8080"]
+2026-05-22 18:40:46.853 [main] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-05-22 18:40:46.918 [main] INFO  c.z.f.tracker.FinanceTrackerApplication  : Started FinanceTrackerApplication in 10.719 seconds (process running for 12.275)
+2026-05-22 18:41:32.450 [http-nio-8080-exec-1] INFO  o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1779445548100,"i_b":"66yYJ6F6dGseIN+kic9T3N3EPhf5GYO01D3Z62+X428","i_e":{"enable_itp_optimization":0},"i_et":1779445118657}] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2026-05-22 18:41:32.462 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-22 18:41:32.724 [http-nio-8080-exec-1] DEBUG c.z.f.tracker.controller.AuthController  : Login attempt: [username=Andy]
+2026-05-22 18:41:33.107 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:33.158 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:33.218 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:33.577 [http-nio-8080-exec-1] INFO  c.z.f.tracker.controller.AuthController  : Login success: [username=Andy]
+2026-05-22 18:41:33.681 [http-nio-8080-exec-2] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/consent]
+2026-05-22 18:41:33.701 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:33.702 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:33.705 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:33.710 [http-nio-8080-exec-2] DEBUG c.z.f.t.mapper.ConsentMapper.insert      : ==>  Preparing: INSERT INTO user_consents (user_id, policy_version, platform, ip_address, accepted_at) VALUES (?, ?, ?, ?, ?)
+2026-05-22 18:41:33.721 [http-nio-8080-exec-2] DEBUG c.z.f.t.mapper.ConsentMapper.insert      : ==> Parameters: 1(Long), 2026-05(String), web(String), 127.0.0.1(String), 2026-05-22T18:41:33.707243(LocalDateTime)
+2026-05-22 18:41:33.740 [http-nio-8080-exec-2] DEBUG c.z.f.t.mapper.ConsentMapper.insert      : <==    Updates: 1
+2026-05-22 18:41:33.744 [http-nio-8080-exec-2] INFO  c.z.f.t.controller.ConsentController     : Consent recorded [userId=1, platform=web, version=2026-05]
+2026-05-22 18:41:33.822 [http-nio-8080-exec-3] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:41:33.838 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:33.839 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:33.851 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:34.546 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getTotalBalance              : ==>  Preparing: SELECT COALESCE( SUM(CASE WHEN type = 'INCOME' THEN amount ELSE ABS(amount) * -1 END), 0 ) FROM transactions WHERE user_id = ?
+2026-05-22 18:41:34.547 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getTotalBalance              : ==> Parameters: 1(Long)
+2026-05-22 18:41:34.555 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getTotalBalance              : <==      Total: 1
+2026-05-22 18:41:34.557 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getMonthlyBalance            : ==>  Preparing: SELECT SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) as income, SUM(CASE WHEN type = 'EXPENSE' THEN ABS(amount) ELSE 0 END) as expense, SUM(CASE WHEN type = 'INCOME' THEN amount ELSE ABS(amount) * -1 END) as net FROM transactions WHERE user_id = ? AND DATE_FORMAT(date, '%Y-%m') = ?
+2026-05-22 18:41:34.559 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getMonthlyBalance            : ==> Parameters: 1(Long), 2026-05(String)
+2026-05-22 18:41:34.564 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getMonthlyBalance            : <==      Total: 1
+2026-05-22 18:41:34.565 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getIncomeVsExpense           : ==>  Preparing: SELECT SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) as totalIncome, SUM(CASE WHEN type = 'EXPENSE' THEN ABS(amount) ELSE 0 END) as totalExpense FROM transactions WHERE user_id = ?
+2026-05-22 18:41:34.566 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getIncomeVsExpense           : ==> Parameters: 1(Long)
+2026-05-22 18:41:34.570 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getIncomeVsExpense           : <==      Total: 1
+2026-05-22 18:41:34.571 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getCategorySummary           : ==>  Preparing: SELECT c.name as name, SUM(ABS(t.amount)) as value FROM transactions t INNER JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? AND t.type = ? GROUP BY c.name
+2026-05-22 18:41:34.572 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getCategorySummary           : ==> Parameters: 1(Long), INCOME(String)
+2026-05-22 18:41:34.575 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getCategorySummary           : <==      Total: 4
+2026-05-22 18:41:34.576 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getCategorySummary           : ==>  Preparing: SELECT c.name as name, SUM(ABS(t.amount)) as value FROM transactions t INNER JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? AND t.type = ? GROUP BY c.name
+2026-05-22 18:41:34.577 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getCategorySummary           : ==> Parameters: 1(Long), EXPENSE(String)
+2026-05-22 18:41:34.581 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.getCategorySummary           : <==      Total: 7
+2026-05-22 18:41:34.655 [http-nio-8080-exec-4] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:41:34.655 [http-nio-8080-exec-5] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:41:34.656 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:34.657 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:34.660 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:34.666 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:34.667 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:34.671 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:34.716 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:41:34.721 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 5(Integer), 0(Integer)
+2026-05-22 18:41:34.729 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 5
+2026-05-22 18:41:34.730 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:41:34.731 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:41:34.733 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:41:34.734 [http-nio-8080-exec-4] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=5, total=32]
+2026-05-22 18:41:34.758 [http-nio-8080-exec-6] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:41:34.760 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:34.761 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:34.765 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:34.766 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:41:34.767 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 5(Integer), 0(Integer)
+2026-05-22 18:41:34.775 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 5
+2026-05-22 18:41:34.776 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:41:34.777 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:41:34.781 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:41:34.781 [http-nio-8080-exec-6] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=5, total=32]
+2026-05-22 18:41:42.351 [http-nio-8080-exec-7] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:41:42.354 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:42.355 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:42.357 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:42.376 [http-nio-8080-exec-8] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:41:42.377 [http-nio-8080-exec-9] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:41:42.377 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:42.378 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:42.379 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:42.379 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:42.380 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:42.381 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:42.382 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:41:42.383 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 5(Integer), 0(Integer)
+2026-05-22 18:41:42.388 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 5
+2026-05-22 18:41:42.389 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:41:42.389 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:41:42.391 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:41:42.392 [http-nio-8080-exec-9] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=5, total=32]
+2026-05-22 18:41:42.403 [http-nio-8080-exec-10] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:41:42.405 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:42.406 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:42.408 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:42.409 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:41:42.410 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 5(Integer), 0(Integer)
+2026-05-22 18:41:42.414 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 5
+2026-05-22 18:41:42.415 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:41:42.416 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:41:42.418 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:41:42.419 [http-nio-8080-exec-10] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=5, total=32]
+2026-05-22 18:41:45.406 [http-nio-8080-exec-1] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:41:45.409 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:45.409 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:45.412 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:45.428 [http-nio-8080-exec-2] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:41:45.428 [http-nio-8080-exec-3] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:41:45.429 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:45.429 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:45.430 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:45.431 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:45.431 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:45.433 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:45.434 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:41:45.435 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 5(Integer), 0(Integer)
+2026-05-22 18:41:45.439 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 5
+2026-05-22 18:41:45.440 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:41:45.440 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:41:45.443 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:41:45.443 [http-nio-8080-exec-3] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=5, total=32]
+2026-05-22 18:41:45.467 [http-nio-8080-exec-5] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:41:45.469 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:45.469 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:45.472 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:45.473 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:41:45.474 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 5(Integer), 0(Integer)
+2026-05-22 18:41:45.478 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 5
+2026-05-22 18:41:45.479 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:41:45.479 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:41:45.481 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:41:45.482 [http-nio-8080-exec-5] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=5, total=32]
+2026-05-22 18:41:53.987 [http-nio-8080-exec-4] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:41:53.991 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:53.992 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:53.995 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:54.010 [http-nio-8080-exec-6] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:41:54.011 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:54.011 [http-nio-8080-exec-7] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:41:54.012 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:54.014 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:54.014 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:54.014 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:54.017 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:54.018 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:41:54.019 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 5(Integer), 0(Integer)
+2026-05-22 18:41:54.024 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 5
+2026-05-22 18:41:54.025 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:41:54.026 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:41:54.028 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:41:54.028 [http-nio-8080-exec-7] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=5, total=32]
+2026-05-22 18:41:54.038 [http-nio-8080-exec-8] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:41:54.040 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:54.041 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:54.043 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:54.044 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:41:54.045 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 5(Integer), 0(Integer)
+2026-05-22 18:41:54.049 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 5
+2026-05-22 18:41:54.050 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:41:54.051 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:41:54.053 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:41:54.053 [http-nio-8080-exec-8] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=5, total=32]
+2026-05-22 18:41:55.258 [http-nio-8080-exec-9] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/categories]
+2026-05-22 18:41:55.261 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:55.262 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:55.264 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:55.288 [http-nio-8080-exec-10] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/categories]
+2026-05-22 18:41:55.290 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:55.290 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:55.293 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:59.537 [http-nio-8080-exec-1] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/categories/getAllByUserId]
+2026-05-22 18:41:59.537 [http-nio-8080-exec-2] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:41:59.540 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:59.540 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:59.540 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:59.540 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:59.542 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:59.542 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:59.543 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:41:59.543 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 15(Integer), 0(Integer)
+2026-05-22 18:41:59.552 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 15
+2026-05-22 18:41:59.553 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:41:59.553 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:41:59.564 [http-nio-8080-exec-3] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/categories/getAllByUserId]
+2026-05-22 18:41:59.565 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:59.566 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:59.572 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:41:59.573 [http-nio-8080-exec-2] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=15, total=32]
+2026-05-22 18:41:59.582 [http-nio-8080-exec-3] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:59.625 [http-nio-8080-exec-5] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/history]
+2026-05-22 18:41:59.627 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:41:59.627 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:41:59.647 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:41:59.648 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.findAllFiltered              : ==>  Preparing: SELECT t.*, c.name as categoryName FROM transactions t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC, t.id DESC LIMIT ? OFFSET ?
+2026-05-22 18:41:59.649 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.findAllFiltered              : ==> Parameters: 1(Long), 15(Integer), 0(Integer)
+2026-05-22 18:41:59.672 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.findAllFiltered              : <==      Total: 15
+2026-05-22 18:41:59.673 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.countFiltered                : ==>  Preparing: SELECT COUNT(*) FROM transactions t WHERE user_id = ?
+2026-05-22 18:41:59.675 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.countFiltered                : ==> Parameters: 1(Long)
+2026-05-22 18:41:59.689 [http-nio-8080-exec-5] DEBUG c.z.f.t.m.T.countFiltered                : <==      Total: 1
+2026-05-22 18:41:59.689 [http-nio-8080-exec-5] DEBUG c.z.f.t.c.TransactionController          : History query [userId=1, page=0, size=15, total=32]
+2026-05-22 18:42:01.116 [http-nio-8080-exec-4] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/recurring]
+2026-05-22 18:42:01.116 [http-nio-8080-exec-6] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/categories/getAllByUserId]
+2026-05-22 18:42:01.118 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:42:01.118 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:42:01.119 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:42:01.119 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:42:01.121 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:42:01.121 [http-nio-8080-exec-6] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:42:01.122 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.RecurringMapper.findByUserId   : ==>  Preparing: SELECT r.*, c.name as categoryName FROM recurring_transactions r LEFT JOIN categories c ON r.category_id = c.id WHERE r.user_id = ? AND r.is_active = TRUE ORDER BY r.next_due_date ASC
+2026-05-22 18:42:01.122 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.RecurringMapper.findByUserId   : ==> Parameters: 1(Long)
+2026-05-22 18:42:01.124 [http-nio-8080-exec-4] DEBUG c.z.f.t.m.RecurringMapper.findByUserId   : <==      Total: 0
+2026-05-22 18:42:01.136 [http-nio-8080-exec-8] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/recurring]
+2026-05-22 18:42:01.136 [http-nio-8080-exec-7] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/categories/getAllByUserId]
+2026-05-22 18:42:01.137 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:42:01.137 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:42:01.137 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:42:01.137 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:42:01.139 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:42:01.139 [http-nio-8080-exec-7] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:42:01.139 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.RecurringMapper.findByUserId   : ==>  Preparing: SELECT r.*, c.name as categoryName FROM recurring_transactions r LEFT JOIN categories c ON r.category_id = c.id WHERE r.user_id = ? AND r.is_active = TRUE ORDER BY r.next_due_date ASC
+2026-05-22 18:42:01.139 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.RecurringMapper.findByUserId   : ==> Parameters: 1(Long)
+2026-05-22 18:42:01.141 [http-nio-8080-exec-8] DEBUG c.z.f.t.m.RecurringMapper.findByUserId   : <==      Total: 0
+2026-05-22 18:42:02.651 [http-nio-8080-exec-9] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:42:02.654 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:42:02.654 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:42:02.656 [http-nio-8080-exec-9] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:42:02.670 [http-nio-8080-exec-10] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/summary]
+2026-05-22 18:42:02.672 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:42:02.672 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:42:02.675 [http-nio-8080-exec-10] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:42:02.694 [http-nio-8080-exec-1] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/trends]
+2026-05-22 18:42:02.696 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:42:02.696 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:42:02.699 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
+2026-05-22 18:42:02.704 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.getTimeSeriesData            : ==>  Preparing: SELECT DATE_FORMAT(date, '%Y-%m-%d') as timeLabel, SUM(ABS(amount)) as total FROM transactions WHERE user_id = ? AND type = ? GROUP BY timeLabel ORDER BY timeLabel ASC
+2026-05-22 18:42:02.704 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.getTimeSeriesData            : ==> Parameters: 1(Long), EXPENSE(String)
+2026-05-22 18:42:02.711 [http-nio-8080-exec-1] DEBUG c.z.f.t.m.T.getTimeSeriesData            : <==      Total: 18
+2026-05-22 18:42:02.728 [http-nio-8080-exec-2] DEBUG c.z.f.t.filter.JwtAuthenticationFilter   : Authenticated [user=Andy, uri=/api/transactions/trends]
+2026-05-22 18:42:02.729 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==>  Preparing: SELECT * FROM users WHERE username = ?
+2026-05-22 18:42:02.730 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : ==> Parameters: Andy(String)
+2026-05-22 18:42:02.732 [http-nio-8080-exec-2] DEBUG c.z.f.t.m.UserMapper.findByUsername      : <==      Total: 1
